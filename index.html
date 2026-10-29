@@ -3,87 +3,110 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>الاستعلام عن النتيجة | Result Lookup</title>
+<title>نتيجة دبلوم الإرشاد السياحي | كلية السياحة والفنادق - جامعة الأقصر</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#EEF3F8; --surface:#FFFFFF; --ink:#12263F; --muted:#5B6B7F; --line:#D5DEE9;
-  --accent:#0E6F7A; --accent-ink:#FFFFFF; --pass:#1B7A4B; --fail:#B3261E; --neutral:#12263F;
-  --focus:#F2A900;
+  --navy:#0B2A4A; --navy-2:#123A63; --gold:#E3B94F; --gold-d:#9A7418;
+  --bg:#EEF2F6; --surface:#FFFFFF; --ink:#0F2238; --muted:#5A6B7E; --line:#D3DCE6;
+  --accent:#123A63; --accent-ink:#FFFFFF; --pass:#1B7A4B; --fail:#B3261E; --neutral:#0F2238; --focus:#E3B94F;
 }
 @media (prefers-color-scheme: dark){
-  :root{ --bg:#0C1826; --surface:#142335; --ink:#E6EEF7; --muted:#94A6BB; --line:#25384F;
-    --accent:#37B3C0; --accent-ink:#06222A; --pass:#4CC48A; --fail:#FF8A80; --neutral:#E6EEF7; }
+  :root{ --bg:#08131F; --surface:#0F2133; --ink:#E7EEF6; --muted:#93A5B9; --line:#223850;
+    --accent:#E3B94F; --accent-ink:#1A1403; --pass:#4CC48A; --fail:#FF8A80; --neutral:#E7EEF6; --gold-d:#E3B94F; }
 }
 *{box-sizing:border-box}
 html,body{margin:0}
-body{
-  min-height:100vh; background:var(--bg); color:var(--ink);
-  font-family:'Cairo',Tahoma,'Segoe UI',Arial,sans-serif; line-height:1.6;
-  display:flex; justify-content:center; padding:32px 16px;
-}
-main{width:100%; max-width:520px}
-h1{font-size:1.9rem; font-weight:800; margin:8px 0 2px}
-.sub{color:var(--muted); margin:0 0 24px; font-size:.95rem}
-form{display:flex; gap:10px; flex-wrap:wrap}
-label{flex-basis:100%; font-weight:600; font-size:.95rem}
+body{background:var(--bg); color:var(--ink); font-family:'Cairo',Tahoma,'Segoe UI',Arial,sans-serif; line-height:1.7; min-height:100vh}
+
+.masthead{background:var(--navy); color:#fff; border-bottom:5px solid var(--gold); padding:26px 16px 30px}
+.masthead-in{max-width:760px; margin:0 auto; display:flex; gap:18px; align-items:center}
+.obelisk{flex:none; width:44px; height:104px}
+.org{font-size:.95rem; color:#C9D6E5; margin:0}
+.org b{color:#fff; font-weight:600}
+h1{font-family:'Amiri','Noto Naskh Arabic',serif; font-size:clamp(1.55rem,4.6vw,2.2rem); line-height:1.35; margin:6px 0 4px; font-weight:700}
+.en{margin:0; font-size:.82rem; color:#9FB3C8; direction:ltr; text-align:right}
+
+main{max-width:760px; margin:0 auto; padding:26px 16px 40px}
+.lead{margin:0 0 16px; font-weight:600; font-size:1.05rem}
+form{display:flex; gap:10px; flex-wrap:wrap; align-items:flex-end}
+.field{flex:1 1 260px; min-width:0}
+label{display:flex; justify-content:space-between; font-weight:600; font-size:.95rem; margin-bottom:6px}
+#count{color:var(--muted); font-weight:400; direction:ltr}
 input{
-  flex:1 1 220px; min-width:0; font:inherit; font-size:1.15rem; letter-spacing:.06em;
-  padding:12px 14px; border:2px solid var(--line); border-radius:10px;
-  background:var(--surface); color:var(--ink); direction:ltr; text-align:left;
+  width:100%; font:inherit; font-size:1.25rem; letter-spacing:.14em; direction:ltr; text-align:left;
+  padding:12px 14px; border:2px solid var(--line); border-radius:8px; background:var(--surface); color:var(--ink);
 }
-input:focus,button:focus-visible{outline:3px solid var(--focus); outline-offset:2px; border-color:var(--accent)}
-button{
-  font:inherit; font-weight:700; padding:12px 22px; border:0; border-radius:10px;
-  background:var(--accent); color:var(--accent-ink); cursor:pointer;
-}
+input:focus,button:focus-visible{outline:3px solid var(--focus); outline-offset:2px; border-color:var(--navy-2)}
+button{font:inherit; font-weight:700; padding:13px 26px; border:0; border-radius:8px; background:var(--accent); color:var(--accent-ink); cursor:pointer}
 button:disabled{opacity:.6; cursor:wait}
-.status{min-height:1.6em; margin:14px 2px 0; color:var(--muted); font-size:.95rem}
+button.ghost{background:transparent; color:var(--accent); border:2px solid var(--line); padding:8px 16px; font-weight:600}
+.status{min-height:1.7em; margin:12px 2px 0; color:var(--muted); font-size:.95rem}
 .status.err{color:var(--fail); font-weight:600}
-.slip{
-  margin-top:10px; background:var(--surface); border:1px solid var(--line);
-  border-radius:4px 4px 14px 14px; border-top:6px solid var(--accent); padding:22px 22px 24px;
-}
+
+.slip{margin-top:12px; background:var(--surface); border:1px solid var(--line); border-radius:10px; overflow:hidden}
 .slip[hidden]{display:none}
-.slip .name{font-size:1.5rem; font-weight:800; margin:0 0 4px}
-.slip dl{display:grid; grid-template-columns:auto 1fr; gap:6px 16px; margin:14px 0 0; padding-top:14px; border-top:1px dashed var(--line)}
-.slip dt{color:var(--muted)}
-.slip dd{margin:0; font-weight:600}
-.verdict{
-  margin-top:20px; padding:14px 16px; border:2px solid currentColor; border-radius:10px;
-  display:flex; justify-content:space-between; align-items:baseline; gap:12px; color:var(--neutral);
-}
-.verdict small{font-size:.9rem; font-weight:600; color:var(--muted)}
-.verdict strong{font-size:1.7rem; font-weight:800}
+.slip-head{background:var(--navy-2); color:#fff; padding:10px 20px; font-size:.9rem; display:flex; justify-content:space-between; gap:10px}
+.slip-body{padding:22px 22px 24px}
+.name{font-family:'Amiri','Noto Naskh Arabic',serif; font-size:1.9rem; line-height:1.4; margin:0 0 6px; font-weight:700}
+dl{display:grid; grid-template-columns:auto 1fr; gap:6px 18px; margin:10px 0 0; padding-top:14px; border-top:1px dashed var(--line)}
+dt{color:var(--muted)} dd{margin:0; font-weight:600}
+dd.nid{direction:ltr; text-align:right; letter-spacing:.08em}
+.verdict{margin-top:20px; padding:14px 18px; border:2px solid currentColor; border-radius:8px; display:flex; justify-content:space-between; align-items:baseline; gap:12px; color:var(--neutral)}
+.verdict small{font-size:.92rem; font-weight:600; color:var(--muted)}
+.verdict strong{font-size:1.8rem; font-weight:800}
 .verdict.pass{color:var(--pass)} .verdict.fail{color:var(--fail)}
-footer{margin-top:28px; font-size:.8rem; color:var(--muted)}
+.actions{margin-top:16px; display:flex; justify-content:flex-end}
+.note{margin-top:26px; font-size:.82rem; color:var(--muted)}
+
 @media (prefers-reduced-motion:no-preference){ .slip{animation:rise .25s ease-out} @keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}} }
+@media print{
+  body{background:#fff} form,.status,.actions,.note{display:none} .masthead{border-bottom-color:#999}
+  .slip{border-color:#999} .slip-head{background:#eee; color:#000}
+}
+@media (max-width:480px){ .masthead-in{gap:12px} .obelisk{width:32px; height:78px} }
 </style>
 </head>
 <body>
+
+<header class="masthead">
+  <div class="masthead-in">
+        <div>
+      <p class="org"><b>جامعة الأقصر</b> &middot; كلية السياحة والفنادق</p>
+      <h1>دبلوم الدراسات العليا في الإرشاد السياحي</h1>
+      <p class="en">Postgraduate Diploma in Tourist Guidance &mdash; Faculty of Tourism and Hotels, Luxor University</p>
+    </div>
+  </div>
+</header>
+
 <main>
-  <h1>الاستعلام عن النتيجة</h1>
-  <p class="sub">Student result lookup &mdash; أدخل رقمك الجامعي لعرض نتيجتك</p>
+  <p class="lead">الاستعلام عن النتيجة &mdash; أدخل الرقم القومي كما هو في بطاقة الرقم القومي</p>
 
   <form id="f" autocomplete="off">
-    <label for="sid">الرقم الجامعي / Student ID</label>
-    <input id="sid" inputmode="numeric" autocomplete="off" required placeholder="20230145">
+    <div class="field">
+      <label for="nid"><span>الرقم القومي</span><span id="count">0 / 14</span></label>
+      <input id="nid" inputmode="numeric" maxlength="14" autocomplete="off" required placeholder="14 رقماً">
+    </div>
     <button id="go" type="submit">عرض النتيجة</button>
   </form>
   <div id="status" class="status" role="status" aria-live="polite"></div>
 
   <section id="slip" class="slip" hidden aria-live="polite">
-    <p class="name" id="r-name"></p>
-    <dl>
-      <dt>الرقم الجامعي</dt><dd id="r-id"></dd>
-      <dt>القسم / Department</dt><dd id="r-dept"></dd>
-    </dl>
-    <div class="verdict" id="verdict"><small>النتيجة / Result</small><strong id="r-res"></strong></div>
+    <div class="slip-head"><span>نتيجة الطالب</span><span>دبلوم الإرشاد السياحي</span></div>
+    <div class="slip-body">
+      <p class="name" id="r-name"></p>
+      <dl>
+        <dt>الرقم القومي</dt><dd class="nid" id="r-id"></dd>
+        <dt id="dept-t">القسم</dt><dd id="r-dept"></dd>
+      </dl>
+      <div class="verdict" id="verdict"><small>النتيجة</small><strong id="r-res"></strong></div>
+      <div class="actions"><button type="button" class="ghost" id="print">طباعة</button></div>
+    </div>
   </section>
 
-  <footer>إذا لم تظهر نتيجتك تأكد من كتابة الرقم الجامعي بشكل صحيح أو تواصل مع شئون الطلاب.</footer>
+  <p class="note">النتيجة المعروضة للاطلاع فقط وليست مستنداً رسمياً. في حالة وجود أي خطأ في البيانات برجاء التواصل مع شئون الدراسات العليا بالكلية.</p>
 </main>
 
 <script>
@@ -149,19 +172,29 @@ function verdictClass(text) {
   return '';
 }
 
+$('nid').addEventListener('input', () => {
+  $('count').textContent = normId($('nid').value).length + ' / 14';
+});
+
+$('print').addEventListener('click', () => window.print());
+
 $('f').addEventListener('submit', async (e) => {
   e.preventDefault();
   const btn = $('go');
+  const nid = normId($('nid').value);
   $('slip').hidden = true;
+  if (!/^\d{14}$/.test(nid)) { setStatus('الرقم القومي يجب أن يتكون من 14 رقماً.', true); return; }
   setStatus('جارٍ البحث...');
   btn.disabled = true;
   try {
     const data = await loadData();
-    const rec = await lookupRecord($('sid').value, data);
-    if (!rec) { setStatus('لا توجد نتيجة لهذا الرقم. تأكد من الرقم الجامعي.', true); return; }
+    const rec = await lookupRecord(nid, data);
+    if (!rec) { setStatus('لا توجد نتيجة لهذا الرقم القومي. تأكد من صحة الرقم أو تواصل مع شئون الدراسات العليا.', true); return; }
     $('r-name').textContent = rec.n;
-    $('r-id').textContent = normId($('sid').value);
-    $('r-dept').textContent = rec.d;
+    $('r-id').textContent = nid;
+    const hasDept = !!(rec.d && String(rec.d).trim());
+    $('dept-t').hidden = !hasDept; $('r-dept').hidden = !hasDept;
+    $('r-dept').textContent = rec.d || '';
     $('r-res').textContent = rec.r;
     $('verdict').className = 'verdict ' + verdictClass(String(rec.r));
     $('slip').hidden = false;
